@@ -8,7 +8,7 @@ private:
     double a;
     double b;
     double dt;
-    double yCurr;
+    double yCurr = 1.0;
 
 public:
     CubicODE(double a_, double b_, double dt_);

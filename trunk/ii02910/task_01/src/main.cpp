@@ -72,7 +72,7 @@ int main()
     {
     case 1: signal = std::make_unique<ConstantSignal>(1.0); break;
     case 2: signal = std::make_unique<PulseSignal>(); break;
-    case 3: signal = std::make_unique<SineSignal>(); break;
+    default: signal = std::make_unique<SineSignal>(); break;
     }
 
     int n = readSteps();

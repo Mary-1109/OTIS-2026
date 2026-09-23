@@ -10,7 +10,7 @@ private:
     double uMin;
     double uMax;
 
-    double yCurr;
+    double yCurr = 0.0;
 
     double saturate(double u) const;
 

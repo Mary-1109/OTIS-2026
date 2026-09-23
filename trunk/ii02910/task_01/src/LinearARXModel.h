@@ -12,9 +12,9 @@ private:
     double b1;
     double b2;
 
-    double yCurr;
-    double yPrev;
-    double uPrev;
+    double yCurr = 0.0;
+    double yPrev = 0.0;
+    double uPrev = 0.0;
 
 public:
     LinearARXModel(double a1_, double a2_, double b1_, double b2_);

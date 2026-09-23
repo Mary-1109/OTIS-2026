@@ -15,7 +15,7 @@ namespace
         {
             std::cout << prompt;
             double value;
-            if (std::cin >> value && std::isfinite(value))
+            if (std::cin >> value && std::isfinite(value)) 
             {
                 return value;
             }

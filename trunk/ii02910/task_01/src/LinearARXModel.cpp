@@ -1,8 +1,7 @@
 #include "LinearARXModel.h"
 
 LinearARXModel::LinearARXModel(double a1_, double a2_, double b1_, double b2_)
-    : a1(a1_), a2(a2_), b1(b1_), b2(b2_),
-    yCurr(0.0), yPrev(0.0), uPrev(0.0)
+    : a1(a1_), a2(a2_), b1(b1_), b2(b2_)
 {
 }
 
@@ -29,14 +28,14 @@ std::string LinearARXModel::getDescription() const
 
 bool LinearARXModel::checkStability() const
 {
-    double discriminant = a1 * a1 + 4.0 * a2;
+    const double discriminant = a1 * a1 + 4.0 * a2;
     if (discriminant < 0.0)
     {
         return (a2 > -1.0) && (a2 < 1.0);
     }
-    double sqrtD = std::sqrt(discriminant);
-    double z1 = (a1 + sqrtD) / 2.0;
-    double z2 = (a1 - sqrtD) / 2.0;
+    const double sqrtD = std::sqrt(discriminant);
+    const double z1 = (a1 + sqrtD) / 2.0;
+    const double z2 = (a1 - sqrtD) / 2.0;
     return (std::abs(z1) < 1.0) && (std::abs(z2) < 1.0);
 }
 

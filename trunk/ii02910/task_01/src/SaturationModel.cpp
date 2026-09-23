@@ -1,7 +1,7 @@
 #include "SaturationModel.h"
 
 SaturationModel::SaturationModel(double a_, double b_, double uMin_, double uMax_)
-    : a(a_), b(b_), uMin(uMin_), uMax(uMax_), yCurr(0.0)
+    : a(a_), b(b_), uMin(uMin_), uMax(uMax_)
 {
 }
 

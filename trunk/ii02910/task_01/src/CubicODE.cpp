@@ -3,7 +3,7 @@
 #include <sstream>
 
 CubicODE::CubicODE(double a_, double b_, double dt_)
-    : a(a_), b(b_), dt(dt_), yCurr(1.0)
+    : a(a_), b(b_), dt(dt_)
 {
 }
 
