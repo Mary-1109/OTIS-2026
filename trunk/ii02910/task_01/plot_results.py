@@ -9,7 +9,7 @@ Usage:
 Example:
     python plot_results.py result.csv screenshots/01_model_1_8_constant.png "Model 1.8 - Constant"
 """
-
+import os
 import sys
 import csv
 import matplotlib
@@ -18,8 +18,13 @@ import matplotlib.pyplot as plt
 
 
 def load_data(path):
+    abs_path = os.path.abspath(path)
+    cwd = os.path.abspath(os.getcwd())
+    if not abs_path.startswith(cwd):
+        raise ValueError("Access denied: path outside working directory")
+
     taus, us, ys = [], [], []
-    with open(path, 'r', encoding='utf-8') as f:
+    with open(abs_path, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for row in reader:
             taus.append(int(row['tau']))
