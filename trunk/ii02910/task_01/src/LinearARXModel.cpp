@@ -47,8 +47,7 @@ std::string LinearARXModel::getWarningMessage() const
     }
 
     std::ostringstream oss;
-    double discriminant = a1 * a1 + 4.0 * a2;
-    if (discriminant < 0.0)
+    if (const double discriminant = a1 * a1 + 4.0 * a2; discriminant < 0.0)
     {
         oss << "[WARNING] Model 1.8: complex roots, |a2| >= 1. System may be unstable.";
     }

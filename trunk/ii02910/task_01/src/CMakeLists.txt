@@ -13,3 +13,6 @@ add_executable(ii02910_task_01
     InputGenerator.cpp
     SystemFactory.cpp
 )
+target_compile_options(ii02910_task_01 PRIVATE
+    $<$<CXX_COMPILER_ID:MSVC>:/std:c++17>
+)

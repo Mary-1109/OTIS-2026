@@ -16,8 +16,7 @@ namespace
         while (true)
         {
             std::cout << prompt;
-            int value;
-            if (std::cin >> value && value >= lo && value <= hi)
+            if (int value; std::cin >> value && value >= lo && value <= hi)
             {
                 return value;
             }
@@ -33,8 +32,7 @@ namespace
         while (true)
         {
             std::cout << "Number of simulation steps (n > 0): ";
-            int n;
-            if (std::cin >> n && n > 0)
+            if (int n; std::cin >> n && n > 0)
             {
                 return n;
             }
