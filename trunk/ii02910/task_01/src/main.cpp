@@ -4,6 +4,7 @@
 #include <memory>
 #include <string>
 #include <limits>
+#include <cstdlib>
 
 #include "AbstractSystem.h"
 #include "InputGenerator.h"
@@ -115,5 +116,14 @@ int main()
     std::cout << "Saved to result.csv\n";
     std::cout << "Done.\n";
 
+#ifdef _WIN32
+    std::system(
+        "cd /d \"D:\\otis\\OTIS-2026\\trunk\\ii02910\\task_01\" "
+        "&& python plot_results.py result.csv doc\\screenshots\\last_run.png \"Simulation result\" "
+        "&& start \"\" doc\\screenshots\\last_run.png"
+    );
+    std::system("pause");
+#endif
+ 
     return 0;
 }
