@@ -5,7 +5,10 @@
 class SaturationModel : public AbstractSystem
 {
 private:
-    double a, b, uMin, uMax;
+    double a;
+    double b;
+    double uMin;
+    double uMax;
     double currentY = 0.0;
 
     double applySaturation(double u) const;

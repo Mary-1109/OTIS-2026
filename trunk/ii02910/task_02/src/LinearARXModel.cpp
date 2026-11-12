@@ -28,7 +28,7 @@ std::string LinearARXModel::getDescription() const
 
 bool LinearARXModel::checkStability() const
 {
-    const double discriminant = a1 * a1 + 4.0 * a2;
+    const double discriminant = a1 * a1 + 4.0 * a2;// NOSONAR
     if (discriminant < 0.0)
     {
         return (a2 > -1.0) && (a2 < 1.0);
@@ -44,8 +44,7 @@ std::string LinearARXModel::getWarningMessage() const
     if (checkStability()) return "";
 
     std::ostringstream oss;
-    const double discriminant = a1 * a1 + 4.0 * a2;
-    if (discriminant < 0.0)
+    if (const double discriminant = a1 * a1 + 4.0 * a2; discriminant < 0.0)
     {
         oss << "[WARNING] Model 1.8: complex roots, |a2| >= 1. System may be unstable.";
     }
