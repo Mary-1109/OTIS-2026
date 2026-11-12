@@ -5,18 +5,13 @@
 class SaturationModel : public AbstractSystem
 {
 private:
-    double a;
-    double b;
-    double uMin;
-    double uMax;
+    double a, b, uMin, uMax;
+    double currentY = 0.0;
 
-    double yCurr = 0.0;
-
-    double saturate(double u) const;
+    double applySaturation(double u) const;
 
 public:
     SaturationModel(double a_, double b_, double uMin_, double uMax_);
-
     double step(double u) override;
     void reset() override;
     std::string getDescription() const override;

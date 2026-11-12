@@ -7,18 +7,18 @@ LinearARXModel::LinearARXModel(double a1_, double a2_, double b1_, double b2_)
 
 double LinearARXModel::step(double u)
 {
-    double yNext = a1 * yCurr + a2 * yPrev + b1 * u + b2 * uPrev;
-    yPrev = yCurr;
-    yCurr = yNext;
-    uPrev = u;
-    return yCurr;
+    double nextY = a1 * currentY + a2 * previousY + b1 * u + b2 * previousU;
+    previousY = currentY;
+    currentY = nextY;
+    previousU = u;
+    return currentY;
 }
 
 void LinearARXModel::reset()
 {
-    yCurr = 0.0;
-    yPrev = 0.0;
-    uPrev = 0.0;
+    currentY = 0.0;
+    previousY = 0.0;
+    previousU = 0.0;
 }
 
 std::string LinearARXModel::getDescription() const
@@ -41,23 +41,19 @@ bool LinearARXModel::checkStability() const
 
 std::string LinearARXModel::getWarningMessage() const
 {
-    if (checkStability())
-    {
-        return "";
-    }
+    if (checkStability()) return "";
 
     std::ostringstream oss;
-    if (const double discriminant = a1 * a1 + 4.0 * a2; discriminant < 0.0)
+    const double discriminant = a1 * a1 + 4.0 * a2;
+    if (discriminant < 0.0)
     {
         oss << "[WARNING] Model 1.8: complex roots, |a2| >= 1. System may be unstable.";
     }
     else
     {
-        double sqrtD = std::sqrt(discriminant);
-        double z1 = (a1 + sqrtD) / 2.0;
-        double z2 = (a1 - sqrtD) / 2.0;
-        oss << "[WARNING] Model 1.8: roots z1 = " << z1
-            << ", z2 = " << z2 << " - outside unit circle. System is UNSTABLE.";
+        const double sqrtD = std::sqrt(discriminant);
+        oss << "[WARNING] Model 1.8: roots z1=" << (a1 + sqrtD) / 2.0
+            << ", z2=" << (a1 - sqrtD) / 2.0 << " - UNSTABLE.";
     }
     return oss.str();
 }

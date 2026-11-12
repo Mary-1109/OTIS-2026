@@ -5,7 +5,7 @@ SaturationModel::SaturationModel(double a_, double b_, double uMin_, double uMax
 {
 }
 
-double SaturationModel::saturate(double u) const
+double SaturationModel::applySaturation(double u) const
 {
     if (u > uMax) return uMax;
     if (u < uMin) return uMin;
@@ -14,13 +14,13 @@ double SaturationModel::saturate(double u) const
 
 double SaturationModel::step(double u)
 {
-    yCurr = a * yCurr + b * saturate(u);
-    return yCurr;
+    currentY = a * currentY + b * applySaturation(u);
+    return currentY;
 }
 
 void SaturationModel::reset()
 {
-    yCurr = 0.0;
+    currentY = 0.0;
 }
 
 std::string SaturationModel::getDescription() const
