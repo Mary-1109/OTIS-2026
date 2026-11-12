@@ -1,11 +1,16 @@
 #pragma once
 
+// Model 3.6 Ч кубическое дифференциальное уравнение.
+// –еализует метод Ёйлера дл€ численного решени€.
+
 #include "AbstractSystem.h"
 
 class CubicODE : public AbstractSystem
 {
 private:
-    double a, b, dt;
+    double a;
+    double b;
+    double dt;
     double currentY = 1.0;
 
 public:

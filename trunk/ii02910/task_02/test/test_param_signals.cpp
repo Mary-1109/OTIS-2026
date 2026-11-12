@@ -3,7 +3,6 @@
 #include "InputGenerator.h"
 #include <memory>
 
-// ѕараметризованный класс дл€ тестов с сигналами
 class SignalModelTest : public ::testing::TestWithParam<int>
 {
 protected:
@@ -14,14 +13,13 @@ protected:
     {
         switch (GetParam())
         {
-        case 1: signal = std::make_unique<ConstantSignal>(1.0); break;
-        case 2: signal = std::make_unique<PulseSignal>(); break;
-        case 3: signal = std::make_unique<SineSignal>(); break;
+        case 1: signal = std::make_unique<ConstantInput>(1.0); break;
+        case 2: signal = std::make_unique<PulseInput>(); break;
+        case 3: signal = std::make_unique<SineInput>(); break;
         }
     }
 };
 
-// “ест: модель сходитс€ при разных сигналах
 TEST_P(SignalModelTest, ConvergesWithDifferentSignals)
 {
     model.reset();
@@ -30,14 +28,12 @@ TEST_P(SignalModelTest, ConvergesWithDifferentSignals)
     {
         double u = signal->getValue(tau);
         double y = model.step(u);
-        // ѕровер€ем, что значени€ конечные (не inf/nan)
         EXPECT_TRUE(std::isfinite(y)) << "Non-finite y at tau=" << tau;
         y_prev = y;
     }
     EXPECT_TRUE(std::isfinite(y_prev));
 }
 
-// “ест: модель стабильна при |a| < 1
 TEST_P(SignalModelTest, StabilityWithDifferentSignals)
 {
     EXPECT_TRUE(model.checkStability());

@@ -2,6 +2,7 @@
 
 #include <string>
 
+// Базовый интерфейс генератора входного сигнала
 class InputSignal
 {
 public:
@@ -10,26 +11,29 @@ public:
     virtual std::string getLabel() const = 0;
 };
 
-class ConstantSignal : public InputSignal
+// Постоянный сигнал: u(tau) = level
+class ConstantInput : public InputSignal
 {
 private:
     double level;
 
 public:
-    explicit ConstantSignal(double level_ = 1.0) : level(level_) {}
+    explicit ConstantInput(double level_ = 1.0) : level(level_) {}
 
     double getValue(int tau) const override;
     std::string getLabel() const override;
 };
 
-class PulseSignal : public InputSignal
+// Импульсный сигнал: u(1) = 1, u(tau>1) = 0
+class PulseInput : public InputSignal
 {
 public:
     double getValue(int tau) const override;
     std::string getLabel() const override;
 };
 
-class SineSignal : public InputSignal
+// Гармонический сигнал: u(tau) = sin(tau)
+class SineInput : public InputSignal
 {
 public:
     double getValue(int tau) const override;

@@ -13,8 +13,7 @@ namespace
         while (true)
         {
             std::cout << prompt;
-            double value;
-            if (std::cin >> value && std::isfinite(value))
+            if (double value; std::cin >> value && std::isfinite(value))
                 return value;
             std::cout << "Invalid input. Try again.\n";
             std::cin.clear();
@@ -23,11 +22,11 @@ namespace
     }
 }
 
-std::unique_ptr<AbstractSystem> SystemFactory::create(ModelType type)
+std::unique_ptr<AbstractSystem> SystemFactory::create(SystemType type)
 {
     switch (type)
     {
-    case ModelType::LinearARX:
+    case SystemType::ARX:
     {
         std::cout << "\n--- Model 1.8 parameters ---\n";
         double a1 = readDoubleParam("a1 = ");
@@ -36,7 +35,7 @@ std::unique_ptr<AbstractSystem> SystemFactory::create(ModelType type)
         double b2 = readDoubleParam("b2 = ");
         return std::make_unique<LinearARXModel>(a1, a2, b1, b2);
     }
-    case ModelType::Saturation:
+    case SystemType::Sat:
     {
         std::cout << "\n--- Model 2.2 parameters ---\n";
         double a = readDoubleParam("a  = ");
@@ -45,7 +44,7 @@ std::unique_ptr<AbstractSystem> SystemFactory::create(ModelType type)
         double uMax = readDoubleParam("uMax = ");
         return std::make_unique<SaturationModel>(a, b, uMin, uMax);
     }
-    case ModelType::CubicODE:
+    case SystemType::Cubic:
     {
         std::cout << "\n--- Model 3.6 parameters ---\n";
         double a = readDoubleParam("a  = ");
@@ -54,6 +53,6 @@ std::unique_ptr<AbstractSystem> SystemFactory::create(ModelType type)
         return std::make_unique<CubicODE>(a, b, dt);
     }
     default:
-        throw std::invalid_argument("Unknown model type");
+        throw std::invalid_argument("Unknown system type");
     }
 }

@@ -6,12 +6,12 @@
 class SystemFactory
 {
 public:
-    enum class ModelType
+    enum class SystemType
     {
-        LinearARX = 1,
-        Saturation = 2,
-        CubicODE = 3
+        ARX = 1,
+        Sat = 2,
+        Cubic = 3
     };
 
-    static std::unique_ptr<AbstractSystem> create(ModelType type);
+    static std::unique_ptr<AbstractSystem> create(SystemType type);
 };
