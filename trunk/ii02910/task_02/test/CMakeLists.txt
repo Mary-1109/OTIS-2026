@@ -18,7 +18,7 @@ add_executable(run_tests
     test_system_factory.cpp)
 
 target_link_libraries(run_tests PRIVATE
-    models
+    ii02910_models
     gtest
     gtest_main
 )
